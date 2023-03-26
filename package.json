@@ -1,5 +1,5 @@
 {
-  "name": "my-store-app",
+  "name": "store-frontend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
     "client:deploy:nc": "npm run client:deploy -- --no-confirm",
     "client:build:deploy": "npm run build && npm run client:deploy",
     "client:build:deploy:nc": "npm run build && npm run client:deploy:nc",
+    "client:rm": "serverless client remove",
     "cloudfront:setup": "sls deploy",
     "cloudfront:domainInfo": "sls domainInfo",
     "cloudfront:invalidateCache": "sls invalidateCloudFrontCache",
@@ -27,9 +28,8 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.7",
-    "@mui/styles": "^5.8.7",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.14",
     "@types/yup": "^0.29.14",
     "axios": "^0.27.2",
     "formik": "^2.2.9",
@@ -57,7 +57,7 @@
     "jsdom": "^20.0.0",
     "msw": "^0.43.1",
     "prettier": "2.7.1",
-    "serverless": "^3.20.0",
+    "serverless": "^3.29.0",
     "serverless-finch": "^4.0.0",
     "serverless-s3-cleaner": "^2.0.1",
     "typescript": "^4.7.4",
