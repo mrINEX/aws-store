@@ -7,13 +7,11 @@ import Typography from "@mui/material/Typography";
 import { formatAsPrice } from "~/utils/utils";
 import AddProductToCart from "~/components/AddProductToCart/AddProductToCart";
 import { useAvailableProducts } from "~/queries/products";
-import { useImages } from "~/queries/images";
 
 export default function Products() {
   const { data = [], isLoading } = useAvailableProducts();
-  const { data: images = [] } = useImages();
 
-  if (isLoading && !images) {
+  if (isLoading) {
     return <Typography>Loading...</Typography>;
   }
 
@@ -27,7 +25,7 @@ export default function Products() {
           >
             <CardMedia
               sx={{ pt: "56.25%" }}
-              image={images[index].urls.small}
+              // image={images[index].urls.small}
               title="Image title"
             />
             <CardContent sx={{ flexGrow: 1 }}>
