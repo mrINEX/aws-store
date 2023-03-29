@@ -29,7 +29,7 @@ export function useAvailableProduct(id?: string) {
     ["products", { id }],
     async () => {
       const res = await axios.get<{ data: AvailableProduct }>(
-        `${API_PATHS.product}/products/${id}`
+        `${API_PATHS.product}/products/${id}` // was `${API_PATHS.bff}/product/${id}`
       );
       return res.data.data;
     },
