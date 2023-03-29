@@ -11,19 +11,7 @@ export function useAvailableProducts() {
       const res = await axios.get<{ data: AvailableProduct[] }>(
         `${API_PATHS.product}/products` // was `${API_PATHS.bff}/product/available`
       );
-      const client_id =
-        "87e26779aa6242a2b2fc8e863886185d1d1f07215e4890071e45448baedf8950";
-      const data = await Promise.all(
-        res.data.data.map(async (item) => {
-          const images = await axios.get(
-            `https://api.unsplash.com/search/photos/?client_id=${client_id}&query=${item.title}`
-          );
-          item.description = images.data.results[0].urls.small;
-          return item;
-        })
-      );
-
-      return data;
+      return res.data.data;
     }
   );
 }

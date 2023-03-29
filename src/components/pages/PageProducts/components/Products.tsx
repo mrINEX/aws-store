@@ -7,28 +7,25 @@ import Typography from "@mui/material/Typography";
 import { formatAsPrice } from "~/utils/utils";
 import AddProductToCart from "~/components/AddProductToCart/AddProductToCart";
 import { useAvailableProducts } from "~/queries/products";
-// import { useImages } from "~/queries/images";
 
 export default function Products() {
-  const { data: products = [], isLoading: productsLoading } =
-    useAvailableProducts();
-  // const { data: images = [], isLoading: imagesLoading } = useImages();
+  const { data = [], isLoading } = useAvailableProducts();
 
-  if (productsLoading) {
+  if (isLoading) {
     return <Typography>Loading...</Typography>;
   }
 
   return (
     <Grid container spacing={4}>
       {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
-      {products.map(({ count, ...product }) => (
+      {data.map(({ count, image, ...product }) => (
         <Grid item key={product.id} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
             <CardMedia
               sx={{ pt: "56.25%" }}
-              image={product.description}
+              image={image}
               title="Image title"
             />
             <CardContent sx={{ flexGrow: 1 }}>
