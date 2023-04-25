@@ -10,3 +10,5 @@
 
 - This is S3 Static website hosting: http://automated-deployment-store.s3-website-us-east-1.amazonaws.com
 - This is direct link to `index.html` from S3: https://automated-deployment-store.s3.amazonaws.com/index.html
+
+done sns-and-sqs
