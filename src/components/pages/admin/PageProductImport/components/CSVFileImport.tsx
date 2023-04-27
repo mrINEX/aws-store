@@ -30,6 +30,7 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
     }
 
     console.log("uploadFile to", url, { file });
+    const password = localStorage.getItem("authorization_token") ?? "";
 
     try {
       const response = await axios({
@@ -37,6 +38,10 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
         url,
         params: {
           name: encodeURIComponent(file.name),
+        },
+        auth: {
+          username: "yours_github_account_login",
+          password: password,
         },
       });
       const signedUrl = response.data.data.signedUrl;
