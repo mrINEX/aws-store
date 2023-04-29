@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 type CSVFileImportProps = {
   url: string;
@@ -30,6 +30,9 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
     }
 
     console.log("uploadFile to", url, { file });
+    const password = localStorage.getItem("authorization_token") ?? "";
+
+    console.log({ password });
 
     try {
       const response = await axios({
@@ -37,6 +40,10 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
         url,
         params: {
           name: encodeURIComponent(file.name),
+        },
+        auth: {
+          username: "yours_github_account_login",
+          password: password,
         },
       });
       const signedUrl = response.data.data.signedUrl;
@@ -48,7 +55,18 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
       });
       console.log("Result: ", result);
     } catch (err) {
-      console.log("Error", err);
+      const error = err as AxiosError;
+      console.log("Error", error);
+      if (error?.response?.status === 403) {
+        alert(
+          "403 Forbidden \nLocal Storage has wrong authorization_token (password)"
+        );
+      }
+      if (error?.response?.status === 401) {
+        alert(
+          "401 Unauthorized \nLocal Storage has not authorization_token (password)"
+        );
+      }
     }
     setFile(undefined);
   };
